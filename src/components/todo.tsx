@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { getLocalstorageItem, setLocalstorageItem } from "../helper/localstorage";
 import TodoItem from "./todoItem";
 
 export enum todoStatus {
@@ -20,16 +21,14 @@ export interface ItodoItemProps {
 }
 
 const Todo: React.FC = () => {
+
   //State
-  const [todoItems, setTodoItems] = useState<ItodoItemsObject[]>([
-    {
-      id: 1,
-      task: "hello",
-      status: todoStatus.Active,
-    },
-  ]);
+  const [todoItems, setTodoItems] = useState<ItodoItemsObject[]>(
+    getLocalstorageItem()
+  );
 
   const [inputTodo, setInputTodo] = useState<string>("");
+
 
   const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputTodo(e.target.value);
@@ -43,7 +42,8 @@ const Todo: React.FC = () => {
       task: inputTodo,
       status: todoStatus.Active,
     };
-
+    
+    setLocalstorageItem([...todoItems, newTodoItem]);
     setTodoItems([...todoItems, newTodoItem]);
     setInputTodo("");
   };
