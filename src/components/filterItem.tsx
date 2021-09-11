@@ -56,7 +56,7 @@ const FilterItem: React.FC<IfilterItemProps> = ({
           <span className="select-box__current-value">{activeFilter}</span>
           <img
             className="select-box__icon"
-            src="http://cdn.onlinewebfonts.com/svg/img_295694.svg"
+            src={`${process.env.PUBLIC_URL}/images/arrow-down.svg`}
             alt="Arrow Icon"
           />
         </div>
@@ -71,7 +71,7 @@ const FilterItem: React.FC<IfilterItemProps> = ({
           <span>
             <img
               className="remove-icon"
-              src="./images/close.png"
+              src={`${process.env.PUBLIC_URL}/images/close.png`}
               alt="remove"
             />
           </span>

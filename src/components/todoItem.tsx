@@ -53,7 +53,7 @@ const TodoItem: React.FC<ItodoItemProps> = ({
             todoItem.status === todoStatus.Completed ? "show" : ""
           }`}
           onClick={activeToggleClickHandler}
-          src="./images/tick.png"
+          src={`${process.env.PUBLIC_URL}/images/tick.png`}
           alt="tick"
         />
       </div>
@@ -68,7 +68,7 @@ const TodoItem: React.FC<ItodoItemProps> = ({
       <img
         className="icon-close"
         onClick={removeTodoItemClickHandler}
-        src="./images/close.png"
+        src={`${process.env.PUBLIC_URL}/images/close.png`}
         alt="close"
       />
     </Item>
