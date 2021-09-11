@@ -132,6 +132,7 @@ const StyledFilter = styled.div`
       .select-box__option {
         display: block;
         padding: 4px 8px;
+        cursor: pointer;
 
         &:hover {
           color: #546c84;
