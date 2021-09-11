@@ -31,12 +31,30 @@ const Todo: React.FC = () => {
 
   const [inputTodo, setInputTodo] = useState<string>("");
 
+  const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputTodo(e.target.value);
+  };
+
+  const formSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const newTodoItem = {
+      id: todoItems.length,
+      task: inputTodo,
+      status: todoStatus.Active,
+    };
+
+    setTodoItems([...todoItems, newTodoItem]);
+    setInputTodo("");
+  };
+
   return (
-    <TodoForm>
+    <TodoForm onSubmit={formSubmitHandler}>
       <input
         className="new-todo"
         placeholder="What needs to be done?"
         value={inputTodo}
+        onChange={inputChangeHandler}
       />
 
       <div className="todo-list">

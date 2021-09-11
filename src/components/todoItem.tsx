@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { ItodoItemProps, ItodoItemsObject, todoStatus } from "./todo";
+import { ItodoItemProps, todoStatus } from "./todo";
 
 const TodoItem: React.FC<ItodoItemProps> = ({
   lastItem,
