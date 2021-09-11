@@ -1,9 +1,20 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { getLocalstorageItem, setLocalstorageItem } from "../helper/localstorage";
+import {
+  getLocalstorageItem,
+  setLocalstorageItem,
+} from "../helper/localstorage";
 import TodoItem from "./todoItem";
+import FilterItem from "./filterItem";
+
 
 export enum todoStatus {
+  Active = "Active",
+  Completed = "Completed",
+}
+
+export enum filterValues {
+  All = "All",
   Active = "Active",
   Completed = "Completed",
 }
@@ -20,15 +31,18 @@ export interface ItodoItemProps {
   setTodoItems: React.Dispatch<React.SetStateAction<ItodoItemsObject[]>>;
 }
 
-const Todo: React.FC = () => {
+export interface IfilterItemProps {
+  itemsLeft: number;
+  setTodoItems: React.Dispatch<React.SetStateAction<ItodoItemsObject[]>>;
+}
 
+const Todo: React.FC = () => {
   //State
   const [todoItems, setTodoItems] = useState<ItodoItemsObject[]>(
     getLocalstorageItem()
   );
 
   const [inputTodo, setInputTodo] = useState<string>("");
-
 
   const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputTodo(e.target.value);
@@ -42,7 +56,7 @@ const Todo: React.FC = () => {
       task: inputTodo,
       status: todoStatus.Active,
     };
-    
+
     setLocalstorageItem([...todoItems, newTodoItem]);
     setTodoItems([...todoItems, newTodoItem]);
     setInputTodo("");
@@ -55,6 +69,13 @@ const Todo: React.FC = () => {
         placeholder="What needs to be done?"
         value={inputTodo}
         onChange={inputChangeHandler}
+      />
+
+      <FilterItem
+        itemsLeft={
+          todoItems.filter((item) => item.status === todoStatus.Active).length
+        }
+        setTodoItems={setTodoItems}
       />
 
       <div className="todo-list">
