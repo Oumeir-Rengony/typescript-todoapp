@@ -69,7 +69,11 @@ const FilterItem: React.FC<IfilterItemProps> = ({
         <p>
           Clear
           <span>
-            <img className="remove-icon" src="./images/close.png" alt="remove" />
+            <img
+              className="remove-icon"
+              src="./images/close.png"
+              alt="remove"
+            />
           </span>
         </p>
       </div>
@@ -85,6 +89,10 @@ const StyledFilter = styled.div`
   padding: 8px 16px;
   font-size: 13px;
   border-bottom: 1px solid #ededed;
+
+  @media (min-width: 768px) {
+    justify-content: space-around;
+  }
 
   .select-box {
     width: 83px;
@@ -113,7 +121,7 @@ const StyledFilter = styled.div`
       list-style: none;
       display: none;
       background: #f5f5f5;
-      text-align:start;
+      text-align: start;
       z-index: 1;
 
       &.show {

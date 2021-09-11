@@ -27,6 +27,16 @@ const StyledWrapper = styled.div`
   align-items: center;
   margin: 18px auto;
 
+  @media (min-width: 425px) {
+    max-width: 600px;
+  }
+
+  @media (min-width: 768px) {
+    border-radius: 20px;
+    padding: 16px;
+    background: rgb(245, 222, 70);
+  }
+
   .header {
     display: flex;
     align-items: center;
@@ -40,8 +50,12 @@ const StyledWrapper = styled.div`
       }
     }
 
-    .header-tile {
-      color: #2c2d2d;
+    .header-title {
+      color: #585858;
+
+      @media (min-width: 768px) {
+        color: #fff;
+      }
     }
   }
 `;
