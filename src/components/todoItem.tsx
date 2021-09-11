@@ -1,12 +1,50 @@
 import React from "react";
 import styled from "styled-components";
-import { ItodoItemProps, todoStatus } from "./todo";
+import { setLocalstorageItem } from "../helper/localstorage";
+import { ItodoItemProps, ItodoItemsObject, todoStatus } from "./todo";
 
 const TodoItem: React.FC<ItodoItemProps> = ({
   lastItem,
   todoItem,
   setTodoItems,
 }) => {
+  //Toggle status to active\completed
+  const filterTodoItem = (data: ItodoItemsObject[]) => {
+    return data.map((item) => {
+      //filter chosen item
+      if (item.id === todoItem.id)
+        return {
+          id: todoItem.id,
+          task: todoItem.task,
+          status:
+            todoItem.status === todoStatus.Active
+              ? todoStatus.Completed
+              : todoStatus.Active,
+        };
+
+      //else retrun original data
+      return item;
+    });
+  };
+
+  const activeToggleClickHandler = (e: React.MouseEvent) => {
+    e.currentTarget.classList.toggle("show");
+
+    setTodoItems((prev) => {
+      const updatedTodoItems = filterTodoItem(prev);
+      setLocalstorageItem(updatedTodoItems);
+      return updatedTodoItems;
+    });
+  };
+
+  const removeTodoItemClickHandler = () => {
+    setTodoItems((prev) => {
+      const updatedTodoItems = prev.filter((item) => item.id !== todoItem.id);
+      setLocalstorageItem(updatedTodoItems);
+      return updatedTodoItems;
+    });
+  };
+
   return (
     <Item className={`${lastItem ? "shadow-three" : ""}`}>
       <div className="tick-container">
@@ -14,6 +52,7 @@ const TodoItem: React.FC<ItodoItemProps> = ({
           className={`icon-tick ${
             todoItem.status === todoStatus.Completed ? "show" : ""
           }`}
+          onClick={activeToggleClickHandler}
           src="./images/tick.png"
           alt="tick"
         />
@@ -26,7 +65,12 @@ const TodoItem: React.FC<ItodoItemProps> = ({
         {todoItem.task}
       </p>
 
-      <img className="icon-close" src="./images/close.png" alt="close" />
+      <img
+        className="icon-close"
+        onClick={removeTodoItemClickHandler}
+        src="./images/close.png"
+        alt="close"
+      />
     </Item>
   );
 };
