@@ -55,6 +55,10 @@ const Todo: React.FC = () => {
   const formSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    //if only whitespaces return
+    if(!inputTodo.trim())
+      return;
+
     const newTodoItem = {
       id: todoItems.length,
       task: inputTodo,
