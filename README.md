@@ -16,4 +16,4 @@ You will also see any lint errors in the console.
 
 ## Website Demo
 
-Go to https://typescript-todoapp.herokuapp.com/
+Go https://ts-todo.onrender.com/
